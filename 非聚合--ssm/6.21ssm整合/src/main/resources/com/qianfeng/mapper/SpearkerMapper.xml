@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.mapper.SpearkerMapper">
+
+    <resultMap id="speakerMap" type="spearker">
+        <id column="id" property="id"></id>
+        <result column="speaker_name" property="speakerName"></result>
+        <result column="speaker_desc" property="speakerDesc"></result>
+        <result column="speaker_job" property="speakerJob"></result>
+        <result column="head_img_url" property="headImgUrl"></result>
+    </resultMap>
+
+    <select id="FindAllSpearker" resultMap="speakerMap">
+        SELECT * FROM speaker
+    </select>
+
+    <select id="findName" parameterType="int" resultMap="speakerMap">
+        SELECT * FROM speaker WHERE id=#{id}
+    </select>
+
+    <delete id="deleteS" parameterType="int">
+        DELETE FROM speaker WHERE id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="spearker" >
+        INSERT INTO speaker (speaker_name,speaker_desc,speaker_job) VALUES (#{speakerName},#{speakerDesc},#{speakerJob})
+    </insert>
+
+    <select id="findById" parameterType="int" resultMap="speakerMap">
+        SELECT * FROM speaker WHERE id =#{id}
+    </select>
+
+    <update id="update1" parameterType="spearker">
+        UPDATE speaker SET speaker_name=#{speakerName},speaker_desc=#{speakerDesc},speaker_job=#{speakerJob} WHERE id=#{id}
+    </update>
+</mapper>
